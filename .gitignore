@@ -1,5 +1,6 @@
 # Ignore the entire bin directory
 bin/
+.vscode/
 
 # Ignore contents of bin but keep the folder itself in git
 # bin/*
