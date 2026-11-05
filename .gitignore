@@ -1,0 +1,13 @@
+# Ignore the entire bin directory
+bin/
+
+# Ignore contents of bin but keep the folder itself in git
+# bin/*
+# !bin/.gitkeep
+
+# Ignore common compiled binaries and build artifacts
+*.out
+*.o
+*.so
+*.a
+*.exe
