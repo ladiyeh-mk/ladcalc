@@ -1,9 +1,9 @@
 # Ignore the entire bin directory
 .vscode/
 
-# Ignore contents of bin but keep the folder itself in git
-# bin/*
-# !bin/.gitkeep
+# keep
+bin/*
+!bin/.gitkeep
 
 # Ignore common compiled binaries and build artifacts
 *.out
