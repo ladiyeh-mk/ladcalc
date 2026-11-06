@@ -47,18 +47,22 @@ void tokenizer_lex(Lexime **lexime_out_ptr, const char *expression) {
                 .type  = t,
                 .slice = dynarr_create(sizeof(char), 2),
             };
-            lex.slice[0] = ch;
-            lex.slice[1] = '\0';
+            dynarr_append(lex.slice, (ch + '\0'));
         }
         else if (isdigit(ch)) {
             lex = (Lexime) {
                 .type  = TK_NUMBER,
                 .slice = dynarr_create(sizeof(char), 2),
             };
+            dynarr_append(lex.slice, expression[current_index]);
+            current_index++;
             
-            while (ch != '+' && ch != '-' && ch != '*' && ch != '/' && ch != '(' && ch != ')') {
-                
+            while (current_index < expr_len && (isdigit(expression[current_index]) || expression[current_index] == '.')) {
+                dynarr_append(lex.slice, expression[current_index]);
+                current_index++;
             }
+            
+            current_index--;
         }
         else {
             continue;
@@ -69,7 +73,7 @@ void tokenizer_lex(Lexime **lexime_out_ptr, const char *expression) {
 }
 
 int main(void) {
-    const char *expression = "3 + 4 - 2 * 5 / 1 + (3 * 3)";
+    const char *expression = "3.14 + 4.32 - 2 * 5 / 1 + (3 * 3)";
     printf("Lexing expression: \"%s\"\n\n", expression);
 
     // 1. Create the dynamic array
